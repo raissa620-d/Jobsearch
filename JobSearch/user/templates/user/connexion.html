@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Connexion</title>
+</head>
+<body>
+ <style>
+        /* Style global */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f4f7fc;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Conteneur de connexion */
+        .login-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Titre */
+        .login-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Style des messages */
+        .message {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+            animation: slideIn 0.4s ease-out forwards;
+        }
+
+        .message.success {
+            color: #155724;
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+        }
+
+        .message.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+        }
+
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Bouton */
+        .btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <!-- Affichage des messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Formulaire de connexion -->
+    <div class="login-container">
+        <h2>Connexion</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
+        <a href="{% url 'choose_account_type' %}">Creer un compte</a>
+    </div>
+
+    <!-- Affichage fluide des messages -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let messages = document.querySelectorAll(".message");
+            messages.forEach(msg => {
+                msg.style.display = "block"; // Affiche les messages avec animation
+                setTimeout(() => msg.style.opacity = "0", 5000); // Disparition après 5s
+            });
+        });
+    </script>
+<div class="bg-blue-500 text-white p-4 rounded-lg">
+</div>
+
+</body>
+</html>
+

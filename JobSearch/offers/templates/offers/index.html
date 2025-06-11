@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Styles pour la section hero */
+    .hero {
+        background-image: url("{% static 'offers/images/hunters-race.jpg' %}"); /* Remplace par ton chemin */
+        background-size: cover;
+        background-position: center;
+        height: 80vh; /* Hauteur de la section hero */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+    }
+
+
+    .hero-text {
+        position: relative;
+        z-index: 2;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    .hero-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: rgba(255, 170, 0, 0.9);
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background-color: rgba(255, 170, 0, 1);
+    }
+
+    /* Styles responsives */
+    @media (max-width: 768px) {
+        .hero-text h2 {
+            font-size: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-text h2 {
+            font-size: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<main>
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Trouvez votre futur job parmi <span class="font-bold">10000</span> postes ouverts</h2>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-4">
+                <!-- Bouton "Voir les offres" -->
+                <a href="{% url 'categorie' %}"
+                   class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300">
+                    Voir les offres
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
