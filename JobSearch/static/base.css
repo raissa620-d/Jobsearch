@@ -2,10 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image:
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+
 }
 
 /* Permet au contenu de prendre toute la hauteur et pousse le footer en bas */

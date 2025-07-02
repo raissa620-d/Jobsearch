@@ -11,21 +11,23 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(env_file=str(BASE_DIR/".env"))
+
+SECRET_KEY =env("SECRET_KEY")
+
+DEBUG = env.bool('DEBUG',True)
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e942t1*7^kfeeta3jypzf%7ja3z6+ywp9x0&*rht*p8c0pxd1q'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,12 +79,23 @@ WSGI_APPLICATION = 'JobSearch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'debi$Jobsearch',
+        'USER': 'debi',
+        'PASSWORD': 'urbain2@',
+        'HOST': 'debi.mysql.pythonanywhere-services.com',
+        'PORT': '',
+    }
 }
+
 
 
 # Password validation
@@ -121,6 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT =BASE_DIR /'média'# Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
